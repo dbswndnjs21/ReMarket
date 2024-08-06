@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img.logo {
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .icons img {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        #right {
+        width : 500px
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            color: #fff;
+            padding: 0 20px;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            background: #575757;
+        }
+
+        .post-view {
+            background: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .post-view h2 {
+            margin: 0 0 10px;
+        }
+
+        .post-view p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .post-view img {
+            max-width: 100%;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .post-view .wishlist-message {
+            display: flex;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            gap: 10px;
+        }
+
+        .post-view .wishlist-message .report-button {
+            background-color: #f44336; /* 빨간색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .wishlist-message .report-button:hover {
+            background-color: #d32f2f; /* 조금 더 어두운 빨간색 */
+        }
+
+        .post-view .wishlist-message .add-to-wishlist {
+            background-color: #FFC107; /* 노란색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .wishlist-message .add-to-wishlist:hover {
+            background-color: #ffca28; /* 조금 더 어두운 노란색 */
+        }
+
+        .post-view .wishlist-message .message-button {
+            background-color: #2196F3; /* 파란색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .wishlist-message .message-button:hover {
+            background-color: #1976D2; /* 조금 더 어두운 파란색 */
+        }
+
+        .post-view .actions {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .post-view .actions button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .actions button:hover {
+            background-color: #45a049;
+        }
+
+        .post-view .actions .delete-button {
+            background-color: #f44336;
+        }
+
+        .post-view .actions .delete-button:hover {
+            background-color: #e53935;
+        }
+
+        /* 목록으로 돌아가기 버튼 스타일 */
+        .back-to-list {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .back-to-list .back-button {
+            background-color: #4CAF50; /* 초록색 */
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .back-to-list .back-button:hover {
+            background-color: #45a049; /* 조금 더 어두운 초록색 */
+        }

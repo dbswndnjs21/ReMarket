@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+}
+
+.header img.logo {
+    margin-right: 15px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header .icons {
+    display: flex;
+    align-items: center;
+}
+
+.header .icons img {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+        #right {
+        width : 500px
+        }
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.nav a {
+    color: #fff;
+    padding: 0 20px;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    background: #575757;
+}
+
+/* Category Menu */
+.category-menu {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.category-menu button {
+    background: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.category-menu button:hover {
+    background: #45a049;
+}
+
+/* Section */
+.section {
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+    color: #4CAF50;
+}
+
+/* Post */
+.post {
+    background: #fff;
+    margin: 10px 0;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-details {
+    flex: 1;
+}
+
+.post h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.post p {
+    margin: 5px 0 0;
+    color: #777;
+}
+
+.post a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+.post a:hover {
+    text-decoration: underline;
+}
+
+.post-file {
+    margin-left: 20px;
+}
+
+.post-file img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.pagination a.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

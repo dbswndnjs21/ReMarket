@@ -1,0 +1,348 @@
+@charset "UTF-8";
+
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img.logo {
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .icons img {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+              #right {
+        width : 500px
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            color: #fff;
+            padding: 0 20px;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            background: #575757;
+        }
+
+        .post-view {
+            background: #fff;
+            margin: 20px 0;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .post-view h2 {
+            margin: 0 0 10px;
+        }
+
+        .post-view p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .post-view img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .post-view .wishlist-message {
+           
+            top: 20px;
+            right: 20px;
+            gap: 10px; /* 버튼들 사이에 간격 추가 */
+        }
+
+        .post-view .wishlist-message .message-button {
+            background-color: #2196F3; /* 파란색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .wishlist-message .message-button:hover {
+            background-color: #1976D2; /* 조금 더 어두운 파란색 */
+        }
+
+        .post-view .wishlist-message .report-button {
+            background-color: #f44336; /* 빨간색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .wishlist-message .report-button:hover {
+            background-color: #e53935; /* 조금 더 어두운 빨간색 */
+        }
+
+        .post-view .actions {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .post-view .actions button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .post-view .actions button:hover {
+            background-color: #45a049;
+        }
+
+        .post-view .actions .delete-button {
+            background-color: #f44336;
+        }
+
+        .post-view .actions .delete-button:hover {
+            background-color: #e53935;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .button-container a:hover {
+            background-color: #45a049;
+        }
+
+		.post-table {
+	     width: 100%; /* 테이블 너비를 100%로 설정 */
+	    border-collapse: collapse; /* 테이블 셀의 경계 합치기 */
+	    background-color: #F4F4F4; /* 배경색 */
+	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+	    border: 1px solid black; /* 테이블 전체 테두리 추가 */
+	    border-left: none;
+	    border-right: none;
+	    border-bottom: 1px solid gray;
+		}
+
+	.post-table th {
+	    background-color: #F4F4F4; /* 제목 배경색 */
+	    padding: 15px; /* 내부 여백 */
+	    text-align: left; /* 왼쪽 정렬 */
+	     border: 1px solid gray; /* 헤더 테두리 추가 */
+	      border-left: 1px solid #e0e0e0;
+	      border-right: 1px solid #e0e0e0;
+	      border-bottom: none;
+	}
+
+	.post-table td {
+	    padding: 10px; /* 데이터 셀 내부 여백 */
+	    border: 1px solid #e0e0e0; /* 데이터 셀 테두리 */
+	}
+	
+	.post-table td.white-bg {
+    background-color: white; /* 기본 흰색 배경색 */
+}
+	
+	.light-bg {
+	    background-color: #F4F4F4; /* 연한 회색 배경색 */
+	}
+	
+	.content-cell {
+    padding: 20px; /* 내부 여백을 늘려서 높이 증가 */
+    height: 150px; /* 원하는 높이 설정 (선택 사항) */
+    background-color: white;
+}
+
+.author-cell, .view-count-cell, .date-cell {
+    width: 170px; /* 원하는 너비로 설정 (예: 100px) */
+}
+
+
+/* 댓글창 */
+.comment-section {
+  	margin: 10px;
+    border: 1px solid #ccc; /* 연한 회색 실선 테두리 */
+    padding: 10px; /* 내부 여백 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    width: 100%; /* 부모의 너비를 100% 차지 */
+    margin-left: 0px;
+}
+
+
+
+.comment-submit-button {
+	align-self: flex-end; /* 버튼을 오른쪽 정렬 */
+    padding: 10px; /* 버튼 내부 여백 */
+    padding: 10px 20px; /* 버튼의 내부 여백 */
+    border: none; /* 버튼의 테두리 제거 */
+    background-color: NONE; /* 버튼의 배경색 */
+    color: BLACK; /* 버튼의 글자색 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+}
+
+.comment-box {
+    margin: 5px; /* 위아래 간격을 20px로 설정 */
+    padding: 10px; /* 내부 여백 추가 (선택 사항) */
+    border-radius: 5px; /* 모서리 둥글게 (선택 사항) */
+}
+
+.comment-area {
+    margin-bottom: 15px; /* 각 댓글 간격 */
+    border: 1px solid #ddd; /* 각 댓글 행 테두리 */
+    padding: 10px; /* 내부 여백 */
+    background-color: #f9f9f9; /* 배경색*/
+   	border-left: none;
+   	border-right: none;
+   	border-top: none;
+   	
+}
+
+.comment-actions {
+    flex: 1; /* 수정/삭제 버튼 영역을 유동적으로 설정 */
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+.user-id {
+    font-weight: bold; /* 글씨 강조. */
+}
+
+
+.comment-input {
+     display: flex;
+     flex-direction: column; /* 요소들을 세로로 나열 */
+      width: 100%; /* 부모의 너비를 100% 차지 */
+    margin-top: 10px; /* 선택 사항: 요소 간 간격 */
+     
+}
+
+.comment-input form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* 폼의 너비를 100% 차지 */
+}
+
+.comment-input-field {
+    padding: 10px; /* 내부 여백 */
+    margin-bottom: 10px; /* 입력 필드와 버튼 사이의 간격 */
+	border: none;
+	font-size: 16px;
+	outline: none; /* 포커스 시 외곽선 제거 (선택 사항) */
+	font-family: Arial, sans-serif; /* 글꼴 적용 풀려서 다시 적용함*/
+	resize: none; /* 사용자 크기 조정 비활성화 (선택 사항) */
+	width: 80%;
+}
+
+			
+.comment-id, .comment-content, .comment-date {
+    margin-bottom: 10px; /* 각 요소 사이의 간격 */
+}
+
+.comment-id {
+	 display: flex; /* Flexbox를 사용하여 수평 정렬 */
+    align-items: center; /* 수직 정렬을 가운데로 설정 */
+    margin-bottom: 10px; /* 각 요소 사이의 간격 */
+	 font-weight: bold; /* 글씨 강조. */
+}
+
+.comment-content {
+	font-size: 16px;
+}
+
+.comment-date {
+	font-size: 14px;
+	color:   #A6C8E0 ;
+}
+
+.comment-details {
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 날짜와 버튼을 양쪽 끝으로 배치 */
+    flex: 1; /* 부모 영역에 맞게 유동적으로 설정 */
+}
+
+.comment-actions button {
+    background-color: #e0e0e0; /* 버튼 배경색: 밝은 회색 */
+    color: #333; /* 버튼 텍스트 색상: 어두운 회색 */
+    border: 1px solid #ccc; /* 버튼 경계선 색상 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    padding: 5px 10px; /* 버튼 패딩 */
+    margin-left: 5px; /* 버튼 간 간격 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    transition: background-color 0.3s, border-color 0.3s; /* 배경색과 경계선 색상 변화 시 애니메이션 효과 */
+}
+
+
+.comment-actions .edit-button {
+    background-color: #e0e0e0; /* 수정 버튼 배경색 */
+    color: #333; /* 수정 버튼 텍스트 색상 */
+    border: 1px solid #ccc; /* 수정 버튼 경계선 색상 */
+}
+
+.comment-actions .delete-button {
+    background-color: #ff6b6b; /* 삭제 버튼 배경색 - 붉은 색 */
+    color: #fff; /* 삭제 버튼 텍스트 색상 */
+    border: 1px solid #ff4c4c; /* 삭제 버튼 경계선 색상 */
+}
+.comment-actions .edit-button:hover {
+    background-color: #d0d0d0; /* 수정 버튼 호버 시 배경색 변화 */
+    border-color: #bbb; /* 수정 버튼 호버 시 경계선 색상 변화 */
+}
+
+.comment-actions .delete-button:hover {
+    background-color: #ff2f2f; /* 삭제 버튼 호버 시 배경색 변화  */
+    border-color: #ff1d1d; /* 삭제 버튼 호버 시 경계선 색상 변화  */
+}
+

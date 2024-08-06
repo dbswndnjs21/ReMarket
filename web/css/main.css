@@ -1,0 +1,300 @@
+@charset "UTF-8";
+
+/*main.jsp*/
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img.logo {
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+	
+        .header .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .icons img {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        
+        #right {
+        width : 500px
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            color: #fff;
+            padding: 0 20px;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            background: #575757;
+        }
+
+        .search-condition {
+		    display: flex;
+		    justify-content: center; /* 수평 가운데 정렬 */
+		  	align-items: center; 
+		    margin-bottom: 20px; /* 아래 여백 추가 */
+		    background-color: #f4f4f4; /* 회색 배경색 */
+		    padding: 15px; /* 패딩 추가 (선택사항) */
+		    border-radius: 5px; /* 모서리 둥글게 (선택사항) */
+		}
+		
+		
+		.search-select {
+			margin: 0;
+		    font-size: 18px; /* 글자 크기 증가 */
+		    padding: 10px; /* 입력 필드의 패딩 증가 */
+		  	width: 200px;
+		}
+		
+		.search-input {
+			margin: 0;
+		    font-size: 18px; /* 글자 크기 증가 */
+		    padding: 10px; /* 입력 필드의 패딩 증가 */
+		    width: 400px;
+		}
+		
+		/* 검색, 초기화 버튼 */
+		.btn {
+		    font-size: 18px; /* 버튼 글자 크기 증가 */
+		    padding: 10px 20px; /* 버튼 패딩 증가 */
+		    background-color: #4CAF50;/* 초록색 */
+		    color: white;
+		    text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none; /* 테두리 제거 */
+            margin: 0 10px;
+		}
+		   
+		.form-Group {
+		    margin: 0 10px; /* 각 요소 간의 간격 조정 */
+		}
+
+        .categories, .popular-items, .new-items {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .items-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            background: #fff;
+            border: 1px solid #ddd;
+            margin: 10px;
+            width: 23%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .item img {
+            max-width: 100%;
+        }
+
+        .item-details {
+            padding: 15px;
+        }
+
+        .item-details h4 {
+            margin: 0 0 10px 0;
+        }
+
+        .item-details p {
+            margin: 0;
+        }
+        
+        
+       /*category */  
+                body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img.logo {
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .icons img {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            color: #fff;
+            padding: 0 20px;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            background: #575757;
+        }
+
+        .category-menu {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .category-menu button {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .category-menu button:hover {
+            background: #45a049;
+        }
+
+        .section {
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .post {
+            background: #fff;
+            margin: 10px 0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-details {
+            flex: 1;
+        }
+
+        .post h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .post p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+
+        .post a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
+        }
+
+        .post-file {
+            margin-left: 20px;
+        }
+
+        .post-file img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        
+        .item-details {
+    position: relative;
+    padding: 15px;
+}
+
+.item-details .status-image {
+    position: absolute;
+    top: 15px;  /* 원하는 위치에 따라 조정 */
+    right: 15px;  /* 오른쪽에 배치 */
+    width: 85px; 
+    height: 85px;
+}
