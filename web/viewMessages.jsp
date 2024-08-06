@@ -48,6 +48,11 @@
                         <input type="hidden" name="productName" value="${message.productName}">
                         <input type="submit" value="답장" class="reply-button">
                     </form>
+                    <form action="message.do" method="post" class="read-form">
+                        <input type="hidden" name="action" value="read">
+                        <input type="hidden" name="msgId" value="${message.msgId}">
+                        <input type="submit" value="읽음" class="read-button">
+                    </form>
                     <form action="message.do" method="post" class="delete-form" onsubmit="return confirmDelete();">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="msgId" value="${message.msgId}">

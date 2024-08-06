@@ -55,7 +55,11 @@ public class MessageController extends HttpServlet {
             req.setAttribute("receiveId", receiveId);
             req.setAttribute("productName", productName);
             req.getRequestDispatcher("sendMessage.jsp").forward(req, resp);
-        } else {
+        } else if("read".equals(action)) {
+            int msgId = Integer.parseInt(req.getParameter("msgId"));
+            dao.readMessage(msgId);
+            resp.sendRedirect("message.do?action=view&status=read");
+        }else {
             resp.sendRedirect(req.getContextPath() + "/viewMessages.jsp");
         }
     }
