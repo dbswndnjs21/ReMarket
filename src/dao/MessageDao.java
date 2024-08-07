@@ -110,9 +110,25 @@ public class MessageDao {
         } finally {
             JdbcUtil.close(con);
         }
-
-
-
     }
+
+    public boolean hasUnreadMessages(String userId) {
+        String sql = "SELECT COUNT(*) FROM messages WHERE receive_id = ? AND msg_status = 1";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(con);
+        }
+        return false;
+    }
+
+
 
 }

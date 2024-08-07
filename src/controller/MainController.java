@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.MessageDao;
 import dao.ProductDao;
 import dto.ProductDto;
 @WebServlet("/main.do")
@@ -21,6 +23,14 @@ public class MainController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		ProductDao productDao = new ProductDao();
+		MessageDao messageDao = new MessageDao();
+		HttpSession session = req.getSession();
+		String  user_id = (String) session.getAttribute("user_id");
+		boolean hasUnreadMessages = messageDao.hasUnreadMessages(user_id);
+		session.setAttribute("hasUnreadMessages", hasUnreadMessages);
+		if(user_id == null) {
+			user_id = "";
+		}
 	    
 	    // 전체 상품 조회
 	    ArrayList<ProductDto> allProducts = productDao.selectAll();
