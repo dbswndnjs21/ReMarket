@@ -16,8 +16,7 @@ String msg = (String) request.getAttribute("msg");
 if (msg != null && !msg.isEmpty()) {
 %>
 <script type="text/javascript">
-        alert('<%=msg%>
-	');
+        alert('<%=msg%>');
 </script>
 <%
 }

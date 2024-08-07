@@ -99,4 +99,20 @@ public class MessageDao {
             JdbcUtil.close(con);
         }
     }
+
+    public void readMessage(int msgId){
+        String sql = "UPDATE messages SET msg_status = 0 WHERE msg_id = ? ";
+        try(PreparedStatement pstmt = con.prepareStatement(sql)){
+            pstmt.setInt(1,msgId);
+            pstmt.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(con);
+        }
+
+
+
+    }
+
 }
