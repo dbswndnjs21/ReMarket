@@ -25,7 +25,6 @@ public class JoinController extends HttpServlet {
         JoinDao dao = new JoinDao();
         int joinResult = 0;
 
-
         if ("CheckId".equals(action)) {
             // 중복 체크 로직
             String user_id = req.getParameter("user_id");
@@ -47,24 +46,33 @@ public class JoinController extends HttpServlet {
                 req.setAttribute("idChecked", "false");
             }
             req.setAttribute("idCheckResult", idCheckResult);
-            req.getRequestDispatcher("/member.jsp").forward(req, resp);
+            forwardWithFormValues(req, resp); // 폼 값을 유지하면서 포워딩
 
         } else if ("register".equals(action)) {
             String idChecked = req.getParameter("idChecked");
             if (!"true".equals(idChecked)) {
                 req.setAttribute("msg", "아이디 중복 확인을 해주세요.");
-                req.getRequestDispatcher("/member.jsp").forward(req, resp);
+                forwardWithFormValues(req, resp);
                 return;
             }
 
             String user_id = req.getParameter("user_id");
             String password = req.getParameter("password");
             String password2 = req.getParameter("password2");
+
+            if (password == null || password.isEmpty() || password2 == null || password2.isEmpty()) {
+                req.setAttribute("msg", "비밀번호를 입력해주세요.");
+                forwardWithFormValues(req, resp);
+                return;
+            }
+
             // pwd2 와 맞지않으면 로그인 페이지로 다시 보내기
             if (!password.equals(password2)) {
                 req.setAttribute("passwordCheck", "비밀번호 확인이 맞지않습니다");
-                req.getRequestDispatcher("/member.jsp").forward(req, resp);
+                forwardWithFormValues(req, resp);
+                return;
             }
+
             String phone = req.getParameter("phone");
             String name = req.getParameter("name");
             String email = req.getParameter("email");
@@ -82,16 +90,29 @@ public class JoinController extends HttpServlet {
             dto.setAddr(addr);
             dto.setGrade(1);
 
-             joinResult = dao.join(dto);
+            joinResult = dao.join(dto);
             System.out.println(joinResult);
-        }
 
-        if (joinResult == 1) {
-            req.setAttribute("msg", "회원가입 완료");
-            req.getRequestDispatcher("/main.do").forward(req, resp);
-        } else {
-            req.setAttribute("msg", "오류로 인한 회원 가입 실패");
-            req.getRequestDispatcher("/member.jsp").forward(req, resp);
+            if (joinResult == 1) {
+                req.setAttribute("msg", "회원가입 완료");
+                req.getRequestDispatcher("/main.do").forward(req, resp);
+            } else {
+                req.setAttribute("msg", "오류로 인한 회원 가입 실패");
+                forwardWithFormValues(req, resp);
+            }
         }
+    }
+
+    private void forwardWithFormValues(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 폼 필드 값을 유지하면서 다시 회원가입 페이지로 포워딩
+        req.setAttribute("user_id", req.getParameter("user_id"));
+        req.setAttribute("password", req.getParameter("password"));
+        req.setAttribute("password2", req.getParameter("password2"));
+        req.setAttribute("phone", req.getParameter("phone"));
+        req.setAttribute("name", req.getParameter("name"));
+        req.setAttribute("email", req.getParameter("email"));
+        req.setAttribute("birth", req.getParameter("birth"));
+        req.setAttribute("addr", req.getParameter("addr"));
+        req.getRequestDispatcher("/member.jsp").forward(req, resp);
     }
 }
