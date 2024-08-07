@@ -212,5 +212,6 @@ if (msg != null && !msg.isEmpty()) {
 		</section>
 
 	</div>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
