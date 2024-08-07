@@ -23,6 +23,8 @@ public class MainController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		ProductDao productDao = new ProductDao();
+
+		// 읽은 쪽지가 있는지 확인
 		MessageDao messageDao = new MessageDao();
 		HttpSession session = req.getSession();
 		String  user_id = (String) session.getAttribute("user_id");
