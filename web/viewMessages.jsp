@@ -30,7 +30,7 @@
     <h2>수신 쪽지함</h2>
     <c:if test="${not empty messages}">
         <c:forEach var="message" items="${messages}">
-            <div class="message-card received">
+            <div class="message-card ${message.msgStatus == 0 ? 'read' : 'unread'}">
                 <div class="message-header">
                     <strong>${message.sendId}</strong>
                     <small class="message-time">
@@ -48,11 +48,13 @@
                         <input type="hidden" name="productName" value="${message.productName}">
                         <input type="submit" value="답장" class="reply-button">
                     </form>
-                    <form action="message.do" method="post" class="read-form">
-                        <input type="hidden" name="action" value="read">
-                        <input type="hidden" name="msgId" value="${message.msgId}">
-                        <input type="submit" value="읽음" class="read-button">
-                    </form>
+                    <c:if test="${message.msgStatus != 0}">
+                        <form action="message.do" method="post" class="read-form">
+                            <input type="hidden" name="action" value="read">
+                            <input type="hidden" name="msgId" value="${message.msgId}">
+                            <input type="submit" value="읽음" class="read-button">
+                        </form>
+                    </c:if>
                     <form action="message.do" method="post" class="delete-form" onsubmit="return confirmDelete();">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="msgId" value="${message.msgId}">

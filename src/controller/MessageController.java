@@ -27,6 +27,7 @@ public class MessageController extends HttpServlet {
         String action = req.getParameter("action");
         MessageDao dao = new MessageDao();
 
+
         if (action == null || "view".equals(action)) {
             List<MessageDto> messages = dao.getMessages(userId);
             req.setAttribute("messages", messages);

@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     // title이라는 속성 값이 없으면 기본값으로 "다시마켓"을 설정
     String headerTitle = (String)request.getAttribute("headerTitle");
     if (headerTitle == null) {
-    	headerTitle = "다시마켓";
+        headerTitle = "다시마켓";
+    }
+
+    Boolean hasUnreadMessages = (Boolean) session.getAttribute("hasUnreadMessages");
+    if (hasUnreadMessages == null) {
+        hasUnreadMessages = false;
     }
 %>
 <header class="header">
@@ -13,9 +18,9 @@
         <img src="images/logo.svg" alt="다시마켓 로고" width="100" class="logo">
         <h1><%= headerTitle %></h1>
     </div>
-     <div class="icons">
-        <a href="message.do"> 
-            <img src="images/belloff.svg" alt="메시지 아이콘" width="30">
+    <div class="icons">
+        <a href="message.do">
+            <img src="images/<%= hasUnreadMessages ? "bellon.svg" : "belloff.svg" %>" alt="메시지 아이콘" width="30">
         </a>
         <a href="alram.jsp">
             <img src="images/belloff1.svg" alt="알림 벨 아이콘" width="30">
@@ -32,17 +37,17 @@
         <a href="board.do">자유 게시판</a>
         <a href="writeProduct.do">판매등록</a>
     </div>
-    <div id=right>
+    <div id="right">
         <a href="serviceCenter.jsp">고객센터</a>
         <a href="mypage.do">마이페이지</a>
         <%
             if (session.getAttribute("user_id") != null) {
         %>
-            <a href="logout.do">로그아웃</a>
+        <a href="logout.do">로그아웃</a>
         <%
-            } else {
+        } else {
         %>
-            <a href="login.do">로그인</a>
+        <a href="login.do">로그인</a>
         <%
             }
         %>

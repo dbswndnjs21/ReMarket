@@ -122,18 +122,17 @@ h2 {
     border-radius: 5px;
     margin: 10px 0;
     padding: 15px;
-    background-color: #f1f8e9;
     position: relative;
     word-wrap: break-word; /* 길이가 긴 단어를 자동으로 줄바꿈 */
     overflow-wrap: break-word; /* 길이가 긴 단어를 자동으로 줄바꿈 */
 }
 
-.sent {
-    background-color: #e8f5e9;
+.message-card.read {
+    background-color: #e0f2f1; /* 읽은 메시지 색상 */
 }
 
-.received {
-    background-color: #e8f5e9;
+.message-card.unread {
+    background-color: #f1f8e9; /* 읽지 않은 메시지 색상 */
 }
 
 .message-header {
@@ -164,7 +163,8 @@ h2 {
 
 .message-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 10px; /* 버튼 사이의 간격을 조정 */
 }
 
 .reply-button {
@@ -179,6 +179,20 @@ h2 {
 
 .reply-button:hover {
     background-color: #1e88e5;
+}
+
+.read-button {
+    padding: 5px 10px;
+    background-color: #8bc34a;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.read-button:hover {
+    background-color: #388e3c;
 }
 
 .delete-button {
