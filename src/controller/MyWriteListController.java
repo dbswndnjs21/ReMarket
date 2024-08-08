@@ -1,6 +1,7 @@
 package controller;
 
 import dao.MyWriteListDao;
+import dao.NotificationDao;
 import dao.ProductDao;
 import dto.ProductDto;
 
@@ -23,6 +24,7 @@ public class MyWriteListController extends HttpServlet {
         MyWriteListDao dao = new MyWriteListDao();
         ArrayList<ProductDto> productDto = dao.selectList(user_id);
         req.setAttribute("productDto", productDto);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/myWriteList.jsp");
         dispatcher.forward(req, resp);
 
@@ -30,6 +32,17 @@ public class MyWriteListController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String user_id = (String) session.getAttribute("user_id");
+        // 알림에서 들어올실 알림 읽음 표시로 변경 1->2
+        NotificationDao updateNotification = new NotificationDao();
+        updateNotification.updateStatus(user_id);
 
+        MyWriteListDao dao = new MyWriteListDao();
+        ArrayList<ProductDto> productDto = dao.selectList(user_id);
+        req.setAttribute("productDto", productDto);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/myWriteList.jsp");
+        dispatcher.forward(req, resp);
     }
 }

@@ -18,7 +18,8 @@ public class ReserveController extends HttpServlet {
 	 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productId = req.getParameter("productId");
         String productStatus = req.getParameter("productStatus");
-
+        String returnPage = req.getParameter("returnPage"); // returnPage 파라미터 받기
+        
         ProductDao dao = new ProductDao();
         int n;
         String message;
@@ -34,11 +35,17 @@ public class ReserveController extends HttpServlet {
             resp.sendRedirect("errorPage.jsp?rmg=" + URLEncoder.encode(message, "UTF-8"));
             return;
         }
+        
 
+        
+        
+        
         if (n > 0) {
             // 성공 메시지를 세션에 저장하고 리다이렉션
+        	  
             req.getSession().setAttribute("rmg", message);
-            resp.sendRedirect("viewPost.do?productId=" + productId);
+           
+            resp.sendRedirect("viewPost.do?productId=" + productId + "&returnPage=" + URLEncoder.encode(returnPage, "UTF-8"));
         } else {
             // 오류 메시지를 세션에 저장하고 리다이렉션
             req.getSession().setAttribute("rmg", "처리 실패. 다시 시도해 주세요.");

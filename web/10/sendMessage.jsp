@@ -53,7 +53,7 @@
 
         <input type="submit" value="전송">
     </form>
-    <a href="message.do?action=view" class="back-btn">목록</a>
+    <a href="message.do?action=view" class="back-btn">쪽지 목록으로 돌아가기</a>
 </div>
 </body>
 </html>

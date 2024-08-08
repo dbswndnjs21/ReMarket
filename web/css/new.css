@@ -72,6 +72,39 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
+        /* Status Menu */
+.status-menu {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-bottom: 20px;
+}
+
+.status-menu form {
+    display: flex;
+    align-items: center;
+}
+
+.status-menu select {
+    padding: 10px 15px; /* 크기 조정 */
+    font-size: 16px; /* 글씨 크기 조정 */
+    border: 1px solid #ddd;
+    border-radius: 5px; /* 모서리 둥글게 */
+    margin-right: 10px;
+}
+
+.status-menu button {
+    background: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px; /* 크기 조정 */
+    font-size: 16px; /* 글씨 크기 조정 */
+    cursor: pointer;
+    border-radius: 5px; /* 모서리 둥글게 */
+}
+
+.status-menu button:hover {
+    background: #45a049;
+}
 
         h2 {
             border-bottom: 2px solid #4CAF50;
@@ -135,9 +168,9 @@
 }
 
 .pagination a.active {
-    background-color: #007bff;
+    background-color: #4CAF50;
     color: white;
-    border-color: #007bff;
+    border-color: #4CAF50;
 }
 
 .pagination a:hover {

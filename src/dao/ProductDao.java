@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import db.JdbcUtil;
 import dto.FileDto;
 import dto.ProductDto;
@@ -257,20 +259,36 @@ public class ProductDao {
 		// public int insertFile(FileDto)
 	}
 
-	public ProductDto viewPost(int productId) {
+	public ProductDto viewPost(int productId, String loginId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ProductDto to = null;
-
+		String user_id = null;
+		
 		try {
 			con = JdbcUtil.getCon();
-
-			// 조회수 증가를 위한 쿼리
-			String updateSql = "UPDATE product SET hit = hit + 1 WHERE product_id=?";
-			pstmt = con.prepareStatement(updateSql);
-			pstmt.setInt(1, productId);
-			pstmt.executeUpdate();
+			//세션에서 사용자 아이디 가져오기
+	        
+			
+			
+	        String userIdSql = "select user_id from product where product_id=?";
+	        pstmt = con.prepareStatement(userIdSql);
+	        pstmt.setInt(1, productId);
+	       
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	        	user_id = rs.getString("user_id");
+	        	rs.close();
+	            pstmt.close();
+	        }   
+	        
+	        if (loginId == null || !loginId.equals(user_id)) {
+                String updateSql = "UPDATE product SET hit = hit + 1 WHERE product_id=?";
+                pstmt = con.prepareStatement(updateSql);
+                pstmt.setInt(1, productId);
+                pstmt.executeUpdate();
+            }
 
 			// 상세 정보 조회 쿼리
 			String selectSql = "SELECT p.product_id, p.product_name, p.user_id, p.price, p.product_date, p.modify_date, "
@@ -300,7 +318,7 @@ public class ProductDao {
 				to.setCategory(rs.getString("category"));
 				to.setHit(rs.getInt("hit"));
 				to.setContent(rs.getString("content"));
-
+				
 				// 파일 정보를 설정
 				FileDto fileDto = new FileDto();
 				fileDto.setFileId(rs.getString("file_id"));

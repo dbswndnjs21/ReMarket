@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ProductDao;
 import dto.ProductDto;
@@ -17,11 +18,21 @@ public class ViewPostController extends HttpServlet {
    @Override
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       // TODO Auto-generated method stub
-	  String returnPage = req.getHeader("Referer");
-	  if (returnPage != null && !returnPage.isEmpty()) {
-	        req.getSession().setAttribute("returnPage", returnPage);
-	    }
-	  
+	   HttpSession session = req.getSession();
+       String loginId = (String) session.getAttribute("user_id");
+	   
+	   // returnPage 파라미터가 있을 때만 세션에 저장
+       String returnPage = req.getParameter("returnPage");
+       if (returnPage == null || returnPage.isEmpty()) {
+           // returnPage가 없으면 referer 헤더에서 값 추출
+           returnPage = req.getHeader("referer");
+       }
+       
+       // returnPage 값이 있으면 세션에 저장
+       if (returnPage != null && !returnPage.isEmpty()) {
+           req.getSession().setAttribute("returnPage", returnPage);
+       }
+	  //System.out.println(returnPage);
 	  
 	   
       int productId = Integer.parseInt(req.getParameter("productId"));
@@ -30,7 +41,7 @@ public class ViewPostController extends HttpServlet {
       
       
       ProductDao dao = new ProductDao();
-      to = dao.viewPost(productId);
+      to = dao.viewPost(productId,loginId);
       
       req.setAttribute("to", to);
       

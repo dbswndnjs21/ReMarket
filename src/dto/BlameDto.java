@@ -13,24 +13,23 @@ public class BlameDto {
 	private Timestamp createdAt; // 신고 게시글 생성일자
 	private int status; // 신고 처리 버튼 클릭 시, status -> 0으로 변환, 기본 값 1
 	private String blameContent; // 신고 내용
+	private String blameUser; // 피신고자 아이디
+	private int product_id; // product 테이블 참고키 fk
 	
 	private String userName; // user1 테이블에서 userName을 사용하기 위해 변수 생성.
-	
-	public String getFormattedCreatedAt() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(createdAt);
-    }
+	private String product_name; // product 테이블에서 product_name을 사용하기 위해 변수 생성. 
 	
 	public BlameDto(int blameId, String blameTitle, String blameCategory, Timestamp createdAt, int status, String blameContent) {
-		
-	}
-	
-	public BlameDto() {
-		// TODO Auto-generated constructor stub
+		this.blameId = blameId;
+		this.blameTitle = blameTitle;
+		this.blameCategory = blameCategory;
+		this.createdAt = createdAt;
+		this.status = status;
+		this.blameContent = blameContent;
 	}
 
 	public BlameDto(int blameId, String pCode, String blameTitle, String blameCategory, String blameContent,
-			Timestamp createdAt, int status, String userName) {
+			Timestamp createdAt, int status, String userName, String blameUser, String product_name, int product_id) {
 		
 		this.blameId = blameId;
 		this.pCode = pCode;
@@ -40,8 +39,12 @@ public class BlameDto {
 		this.createdAt = createdAt;
 		this.status = status;
 		this.userName = userName;
-		// TODO Auto-generated constructor stub
+		this.blameUser = blameUser;
+		this.product_name = product_name;
+		this.product_id = product_id;
 	}
+
+	
 
 	public int getBlameId() {
 		return blameId;
@@ -99,6 +102,22 @@ public class BlameDto {
 		this.blameContent = blameContent;
 	}
 
+	public String getBlameUser() {
+		return blameUser;
+	}
+
+	public void setBlameUser(String blameUser) {
+		this.blameUser = blameUser;
+	}
+
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}	
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -106,13 +125,26 @@ public class BlameDto {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
 
 	@Override
 	public String toString() {
 		return "BlameDto [blameId=" + blameId + ", blameTitle=" + blameTitle + ", blameCategory=" + blameCategory
 				+ ", pCode=" + pCode + ", createdAt=" + createdAt + ", status=" + status + ", blameContent="
-				+ blameContent + ", userName=" + userName + "]";
+				+ blameContent + ", blameUser=" + blameUser + ", product_id=" + product_id + 
+				", userName=" + userName + ", product_name=" + product_name + "]";
 	}
 	
+	public String getFormattedCreatedAt() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(createdAt);
+    }
 	
 }

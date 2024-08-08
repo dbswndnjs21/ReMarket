@@ -1,5 +1,6 @@
 package controller;
 
+import dao.NotificationDao;
 import dao.WishListDao;
 import dto.WishListDto;
 
@@ -32,7 +33,10 @@ public class WishListController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String productId = req.getParameter("productId");
+        String productUser_id = req.getParameter("productUser_id");
+        String productName = req.getParameter("productName");
         HttpSession session = req.getSession();
         String user_id = (String) session.getAttribute("user_id");
 
@@ -49,6 +53,14 @@ public class WishListController extends HttpServlet {
             result = 0;
         } else {
             result = dao.likeInsert(likeMap);
+            // 알람 테이블 insert문
+            NotificationDao notificationDao = new NotificationDao();
+            HashMap<String, String> notificationMap = new HashMap<>();
+            String content = user_id + "님이 '" + productName + "' 게시글을 찜하셨습니다";
+            notificationMap.put("productUser_id", productUser_id);
+            notificationMap.put("user_id", user_id);
+            notificationMap.put("content", content);
+            notificationDao.insertNotification(notificationMap);
         }
 
         if (result == 1) {

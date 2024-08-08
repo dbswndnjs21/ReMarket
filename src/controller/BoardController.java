@@ -33,14 +33,15 @@ public class BoardController extends HttpServlet{
 		
 		// 2. 현재 페이지 번호 가져오기 
 		String pageParam = req.getParameter("page"); // url 파라미터에서 페이지 번호 가져오기
-		int currentPage = (pageParam == null || pageParam.isEmpty()) ? 1 : Integer.parseInt(pageParam); // 기본값1
+		int currentPage = (pageParam == null || pageParam.isEmpty()) ? 1 : Integer.parseInt(pageParam); // 기본값 1
 		
 		// 검색 기능 파라미터 
         String condition = req.getParameter("condition"); // 제목, 내용, 작성자
         String keyword = req.getParameter("keyword"); // 검색 키워드
-        System.out.println(condition);
-        System.out.println(keyword);
 		
+        System.out.println("Condition: " + condition);
+		System.out.println("Keyword: " + keyword);
+        
         ArrayList<BoardDto> lists;
 		int totalPosts;
 		int totalsPages;
@@ -48,8 +49,9 @@ public class BoardController extends HttpServlet{
 		int startIndex = (currentPage-1)*postsPerPage;
         
 		if (condition != null && keyword != null && !keyword.isEmpty()) {
-			lists = dao.searchPosts(condition, keyword);
-			totalPosts = lists.size();
+			totalPosts = dao.getTotalSearchCount(condition, keyword);
+			
+			lists = dao.searchPosts(condition, keyword, startIndex, postsPerPage);
 			totalsPages = (int) Math.ceil((double)totalPosts / postsPerPage);
 		} else {
 			// 3. 전체 게시글 수 가져오기
@@ -63,6 +65,8 @@ public class BoardController extends HttpServlet{
 			lists = dao.selectAll(startIndex, postsPerPage);
 		}
 		
+		
+
 		req.setAttribute("lists", lists);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("totalsPages", totalsPages);
