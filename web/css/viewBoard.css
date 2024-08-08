@@ -346,3 +346,46 @@
     border-color: #ff1d1d; /* 삭제 버튼 호버 시 경계선 색상 변화  */
 }
 
+
+.comment-textarea {
+	font-family: Arial, sans-serif;
+    width: 100%;
+    height: 50px;
+    resize: none;
+    font-size: 16px;
+}
+
+.update-cancel-button {
+    background-color: #f44336; /* 빨간색 배경 */
+    color: white; /* 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    padding: 6px 10px; /* 패딩 추가 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    border-radius: 4px;
+    margin-top: 5px;
+    
+}
+
+.update-cancel-button:hover {
+	 background-color: #ff2f2f; /* 삭제 버튼 호버 시 배경색 변화  */
+    border-color: #ff1d1d; /* 삭제 버튼 호버 시 경계선 색상 변화  */
+	
+	}
+
+.complete-submit-button {
+	background-color: #e0e0e0; /* 버튼 배경색: 밝은 회색 */
+    color: #333; /* 버튼 텍스트 색상: 어두운 회색 */
+    border: 1px solid #ccc; /* 버튼 경계선 색상 */
+    margin-right: 10px; /* 오른쪽 여백 */
+    padding: 6px 10px; /* 패딩 추가 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    border-radius: 4px;
+    margin-top: 5px;
+    
+}
+
+	.complete-submit-button:hover{
+	  background-color: #d0d0d0; /* 수정 버튼 호버 시 배경색 변화 */
+    border-color: #bbb; /* 수정 버튼 호버 시 경계선 색상 변화 */
+
+	}

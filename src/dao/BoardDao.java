@@ -183,6 +183,7 @@ public class BoardDao {
 	                   + "    WHERE ROWNUM <= ? "
 	                   + ") WHERE rnum > ?";
 			
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndex + postsPerPage); // rownum의 최대값
 			pstmt.setInt(2, startIndex);
@@ -231,34 +232,38 @@ public class BoardDao {
 		}
 	}
 	
-	// 6. 게시글 검색 기능 (제목, 내용, 작성자별)
-	public ArrayList<BoardDto> searchPosts(String condition, String keyword) {
+	// 6. 게시글 검색 게시글 모두 조회, 페이징 처리 포함 (제목, 내용, 작성자별)
+	public ArrayList<BoardDto> searchPosts(String condition, String keyword, int startIndex, int postsPerPage) {
 		Connection conn = null; 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			conn = JdbcUtil.getCon();
-			String sql = "select b.*, u.name from board b join user1 u on b.userId = u.pcode where b.status = 1 and "; 
+			String sql = "SELECT * FROM (SELECT ROWNUM rnum, c.* FROM (SELECT b.*, u.name FROM board b JOIN user1 u ON b.userId = u.pcode WHERE b.status = 1 AND "; 
 			// 선택 필드마다 테이블이 다름. 
 			switch (condition) {
 			case "title": 
-				sql += "b.title Like ? order by createdAt desc";
+				sql += "b.title LIKE ? ";
 				break;
 				
 			case "content": 
-				sql += "b.content Like ? order by createdAt desc";
+				sql += "b.content Like ? ";
 				break;
 				
 			case "name": 
-				sql += "u.name Like ? order by createdAt desc";
+				sql += "u.name Like ? ";
 				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + condition);
 			}
 			
+			sql += "ORDER BY b.createdAt DESC) c WHERE ROWNUM <= ?) WHERE rnum > ?";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setInt(2, startIndex + postsPerPage);
+			pstmt.setInt(3, startIndex);
 			rs = pstmt.executeQuery();
 			ArrayList<BoardDto> lists = new ArrayList<>();
 			while(rs.next()) {
@@ -285,7 +290,47 @@ public class BoardDao {
 		}
 	}
 	
-	// 7. 게시글 삭제 (status를 0으로 변경하기, update 쿼리 사용) 
+	// 7. 검색 결과의 총 게시글 수(6과 함께 사용, 페이징 처리에 필요한 메서드)
+	public int getTotalSearchCount(String condition, String keyword) {
+		Connection conn = null; 
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int totalPosts = 0;
+		
+	    try {
+			conn = JdbcUtil.getCon();
+			String sql = "SELECT COUNT(*) FROM board b JOIN user1 u ON b.userId = u.pcode WHERE b.status = 1 AND ";
+			switch (condition) {
+			case "title": 
+			    sql += "b.title LIKE ? ";
+			    break;
+			case "content": 
+			    sql += "b.content LIKE ? ";
+			    break;
+			case "name": 
+			    sql += "u.name LIKE ? ";
+			    break;
+			default:
+			    throw new IllegalArgumentException("Unexpected value: " + condition);
+				}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				totalPosts =rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("[에러] 총 검색 게시글 수 검색 불가 : " + e.getMessage());
+		} finally {
+	        JdbcUtil.close(conn, pstmt, rs);
+	    }
+		return totalPosts;
+	}	
+	
+	// 8. 게시글 삭제 (status를 0으로 변경하기, update 쿼리 사용) 
 		public void deleteBoard(int id) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;

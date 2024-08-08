@@ -48,7 +48,7 @@ public class WriteProductController extends HttpServlet {
 	
 		//C:\\java\\jsp-workspace\\semi\\src\\main\\webapp\\upload
 		//String uploadPath = req.getContextPath() + "/upload/" ; 
-		//System.out.println(uploadPath);
+		System.out.println(uploadPath);
 		//System.out.print(uploadPath + "<br>");
 		
 		MultipartRequest mr = new MultipartRequest(req, uploadPath, // 저장할 디렉토리

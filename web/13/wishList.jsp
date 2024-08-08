@@ -1,0 +1,42 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%
+    request.setAttribute("headerTitle", "관심 상품");
+   %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>관심 상품</title>
+    <style>
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/wishList.css">   
+</head>
+<body>
+     <jsp:include page="header.jsp" />
+
+    <div class="container">
+        <div class="section">
+            <h2>관심 상품</h2>
+            <%-- 여기에 관심 상품 목록을 표시하는 로직이 들어갑니다. --%>
+            <c:forEach var="product" items="${wishListDto}">
+                <div class="post">
+                    <div class="post-details">
+                        <h3><a href="viewPost.do?productId=${product.productId}">${product.productName}</a></h3>
+                        <p>작성자: ${product.writer}</p>
+                        <p>판매금액: ${product.price}</p>
+                        <p>${product.content}</p>
+                    </div>
+                    <c:if test="${not empty product}">
+                        <div class="post-file">
+                            <img src="${pageContext.request.contextPath}/upload/${product.saveFileName}" alt="첨부파일" style="width:100px;height:100px;">
+                        </div>
+                    </c:if>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</body>
+</html>

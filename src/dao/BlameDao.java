@@ -12,47 +12,69 @@ import dto.BlameDto;
 
 public class BlameDao {
 
-	// 1. 신고등록 게시물을 저장 
-	public int insert(BlameDto dto) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = JdbcUtil.getCon();
+    // 1. 신고등록 게시물을 저장 
+    public int insert(BlameDto dto) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int pcode = 0;
+        int product_id = 0;
+        try {
+            conn = JdbcUtil.getCon();
 
-			// 1-1. user1 테이블 -> user_id에 해당하는 pcode 조회
-			String selectPcode = "select pcode from user1 where user_id = ?";
-			pstmt = conn.prepareStatement(selectPcode);
-			pstmt.setString(1, dto.getpCode());
-			rs = pstmt.executeQuery();
+         //    1-1. product 테이블 -> user_id에 해당하는 product_id 조회
+//            String sellerSql = "select blameUser from product where product_id = ?";
+//            try (PreparedStatement pstmt1 = conn.prepareStatement(sellerSql)) {
+//                pstmt1.setInt(1, dto.getProduct_id());
+//                try (ResultSet rs1 = pstmt1.executeQuery()) {
+//                    if (rs1.next()) {
+//                    	//product_id = rs1.getInt(product_id);
+//                    	dto.setBlameUser(rs1.getString("blameUser"));
+//                    } else {
+//                        System.out.println(product_id);
+//                        System.out.println("product_id 값이 없음.");
+//                        return -1;
+//                    }
+//                }
+//            }
 
-			int pcode = 0;
-			if(rs.next()) {
-				pcode = Integer.parseInt(rs.getString("pcode"));
-			} else {
-				System.out.println(pcode);
-				System.out.println("pcode 값이 없음.");
-				return -1;
-			}
+            // 1-2. user1 테이블 -> user_id에 해당하는 pcode 조회
+            String selectPcode = "select pcode from user1 where user_id = ?";
+            try (PreparedStatement pstmt2 = conn.prepareStatement(selectPcode)) {
+                pstmt2.setString(1, dto.getpCode());
+                System.out.println("dto.getpCode:" + dto.getpCode());
+                try (ResultSet rs2 = pstmt2.executeQuery()) {
+                    if (rs2.next()) {
+                        pcode = rs2.getInt("pcode");
+                        System.out.println("pCode :" + pcode);
+                    } else {
+                        System.out.println(pcode);
+                        System.out.println("pcode 값이 없음.");
+                        return -1;
+                    }
+                }
+            }
+            System.out.println("dto : " + dto);
+            // 1-3. 1-1에서 찾은 product_id, 1-2에서 찾은 pcode를 활용해서 게시글 저장
+            String sql = "insert into blame (blameId, pCode, blameTitle, blameCategory, blameContent, status, createdAt, product_id, blameUser) "
+                       + "values (blame_seq.nextval, ?, ?, ?, ?, 1, sysdate, ?, ?)";
+            try (PreparedStatement pstmt3 = conn.prepareStatement(sql)) {
+                pstmt3.setInt(1, pcode);
+                pstmt3.setString(2, dto.getBlameTitle());
+                pstmt3.setString(3, dto.getBlameCategory());
+                pstmt3.setString(4, dto.getBlameContent());
+                pstmt3.setInt(5, dto.getProduct_id());
+                pstmt3.setString(6, dto.getBlameUser());
 
-			// 1-2. 1에서 찾은 pcode를 활용해서 게시글 저장
-			String sql = "insert into blame (blameId, pCode, blameTitle, blameCategory, blameContent, status, createdAt) "
-	                   + "values (blame_seq.nextval, ?, ?, ?, ?, 1, sysdate)";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, pcode);
-	        pstmt.setString(2, dto.getBlameTitle());
-	        pstmt.setString(3, dto.getBlameCategory());
-	        pstmt.setString(4, dto.getBlameContent());
-			
-			return pstmt.executeUpdate(); // 정상적으로 데이터가 들어갔다면 1 반환
-		} catch (SQLException e) {
-			System.out.println("[에러]" + e.getMessage());
-			return -1;
-		} finally {
-			JdbcUtil.close(conn, pstmt, rs);
-		}
-
-	}
+                return pstmt3.executeUpdate(); // 정상적으로 데이터가 들어갔다면 1 반환
+            }
+        } catch (SQLException e) {
+            System.out.println("[에러]" + e.getMessage());
+            return -1;
+        } finally {
+            JdbcUtil.close(conn, pstmt, rs);
+        }
+    }
 
 	// 2. 전체 신고 조회
 	public ArrayList<BlameDto> selectAll() {
@@ -63,12 +85,14 @@ public class BlameDao {
 		ArrayList<BlameDto> lists;
 		try {
 			conn = JdbcUtil.getCon();
-
-			// blame 테이블과 user1 테이블 조인 -> user1테이블에 name 값 가져오기 위함. 
-			String sql = "select b.blameId, b.pCode, b.blameTitle, b.blameCategory, b.blameContent, b.createdAt, b.status, "
-					+ "u.name from blame b join user1 u on b.pCode = u.pcode "
-					+ "where b.status = 1 "
-					+ "ORDER BY b.createdAt DESC"; // 최신에 작성한 게시글이 가장 위에 오게 표시. 정렬하지 않을 경우, 순서가 랜덤처럼 보임. 
+ 
+			String sql = "select b.blameId, b.pCode, b.blameTitle, b.blameCategory, b.blameContent, "
+			           + "b.createdAt, b.status, b.blameUser, b.product_id ,u.name, p.product_name "
+			           + "from blame b "
+			           + "join user1 u on b.pCode = u.pcode "
+			           + "join product p on b.product_id = p.product_id "
+			           + "where b.status = 1 "
+			           + "ORDER BY b.createdAt ASC"; // 가장 오래된 신고글부터 순차적으로 처리해야 하므로 맨 위로 올라오게 함.
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			lists = new ArrayList<BlameDto>();
@@ -80,8 +104,12 @@ public class BlameDao {
 				String blameContent = rs.getString("blameContent");
 				Timestamp createdAt = rs.getTimestamp("createdAt");
 				int status = rs.getInt("status");
-				String userName = rs.getString("userName");
-				BlameDto dto = new BlameDto(blameId, pCode, blameTitle, blameCategory, blameContent, createdAt, status, userName);
+				String blameUser = rs.getString("blameUser");
+				int product_id = rs.getInt("product_id");
+				String userName = rs.getString("name");
+				String product_name = rs.getString("product_name");
+				
+				BlameDto dto = new BlameDto(blameId, pCode, blameTitle, blameCategory, blameContent, createdAt, status, blameUser, userName, product_name, product_id);
 				lists.add(dto);
 			}
 			return lists;
@@ -103,8 +131,11 @@ public class BlameDao {
 			conn = JdbcUtil.getCon();
 
 			// 3-2. 게시글 정보 조회 로직
-			String sql = "SELECT b.blameId, b.pCode, b.blameTitle, b.maleCategory, b.blameContent, b.createdAt, b.status, u.name " 
-					+ "FROM blame b JOIN user1 u ON b.pCode = u.pcode WHERE b.blameId = ?";
+			String sql =  "select b.blameId, b.pCode, b.blameTitle, b.blameCategory, b.blameContent, b.createdAt, b.status, b.blameUser, b.product_id, u.name as userName, p.product_name "
+	                + "from blame b "
+	                + "join user1 u on b.pCode = u.pcode "
+	                + "join product p on b.product_id = p.product_id "
+	                + "where b.blameId = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, blameId);
 			rs = pstmt.executeQuery();
@@ -117,8 +148,13 @@ public class BlameDao {
 				String blameContent = rs.getString("blameContent");
 				Timestamp createdAt = rs.getTimestamp("createdAt");
 				int status = rs.getInt("status");
+				String blameUser = rs.getString("blameUser");
 				String userName = rs.getString("userName");
-				dto = new BlameDto(blameId, pCode, blameTitle, blameCategory, blameContent, createdAt, status, userName);
+				String product_name = rs.getString("product_name");
+				int product_id = rs.getInt("product_id");
+				
+				
+				dto = new BlameDto(blameId, pCode, blameTitle, blameCategory, blameContent, createdAt, status, blameUser, userName, product_name, product_id);
 			}
 
 		} catch (SQLException e) {
@@ -171,10 +207,11 @@ public class BlameDao {
 
 			String sql = "SELECT * FROM ( "
 	                   + "    SELECT ROWNUM rnum, c.* FROM ( "
-	                   + "        SELECT b.*, u.name FROM blame b "
+	                   + "        SELECT b.*, u.name, p.product_name FROM blame b "
 	                   + "        JOIN user1 u ON b.pCode = u.pcode "
+	                   + "		  join product p on b.product_id = p.product_id "
 	                   + "        where b.status = 1 "
-	                   + "        ORDER BY b.createdAt DESC "
+	                   + "        ORDER BY b.createdAt ASC "
 	                   + "    ) c "
 	                   + "    WHERE ROWNUM <= ? "
 	                   + ") WHERE rnum > ?";
@@ -194,7 +231,10 @@ public class BlameDao {
 		                rs.getString("blameContent"),
 		                rs.getTimestamp("createdAt"),
 		                rs.getInt("status"),
-		                rs.getString("Name")
+		                rs.getString("Name"),
+		                rs.getString("blameUser"),
+		                rs.getString("product_name"),
+		                rs.getInt("product_id")
 		            );
 		            System.out.println(  rs.getInt("blameId"));
 		            System.out.println(    rs.getString("Name"));
@@ -243,14 +283,17 @@ public class BlameDao {
 			ArrayList<BlameDto> lists = new ArrayList<>();
 			while(rs.next()) {
 				BlameDto dto = new BlameDto(
-				rs.getInt("blameId"),
-				rs.getString("pCode"),
-				rs.getString("blameTitle"),
-				rs.getString("blameCategory"),
-				rs.getString("blameContent"),
-				rs.getTimestamp("createdAt"),
-				rs.getInt("status"),
-				rs.getString("name")
+						rs.getInt("blameId"),
+		                rs.getString("pCode"),
+		                rs.getString("blameTitle"),
+		                rs.getString("blameCategory"),
+		                rs.getString("blameContent"),
+		                rs.getTimestamp("createdAt"),
+		                rs.getInt("status"),
+		                rs.getString("Name"),
+		                rs.getString("blameUser"),
+		                rs.getString("product_name"),
+		                rs.getInt("product_id")
 				);
 				
 				lists.add(dto);
@@ -264,8 +307,8 @@ public class BlameDao {
 		}
 	}
 	
-	// 6. 신고글 처리 및 삭제 (status를 0으로 변경하기, update 쿼리 사용) 
-		public void deleteBlame(int blameId) {
+	// 6. 신고글 처리완료(status를 0으로 변경하기, update 쿼리 사용) 
+		public void completeBlame(int blameId) {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			
@@ -279,10 +322,29 @@ public class BlameDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+		
+		
 		}
-	// 7. 알림 전송 메서드
+		
+	// 9. 신고글 처리거부	
+		public void refuseBlame(int blameId) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				conn = JdbcUtil.getCon();
+				String sql = "update blame set status = 0 where id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, blameId);
+				 pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		}
+	// 8. 알림 전송 메서드
 		public void sendNotification(String userName, String message) {
 	        // 알림 전송 로직 구현 예정
 	    }

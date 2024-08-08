@@ -19,8 +19,8 @@ public class DeletePostController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//String path = req.getServletContext().getRealPath("/upload");
-		String path = "C:\\java\\jsp-workspace\\semi\\src\\main\\webapp\\upload";
+		String path = req.getServletContext().getRealPath("/upload");
+		//String path = "C:\\java\\jsp-workspace\\semi\\src\\main\\webapp\\upload";
 		
 		//System.out.println(path);
 		String deleteFile = req.getParameter("saveFileName");

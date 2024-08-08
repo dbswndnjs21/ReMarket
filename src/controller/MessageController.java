@@ -28,11 +28,14 @@ public class MessageController extends HttpServlet {
         MessageDao dao = new MessageDao();
 
 
+
+
         if (action == null || "view".equals(action)) {
             List<MessageDto> messages = dao.getMessages(userId);
             req.setAttribute("messages", messages);
             req.getRequestDispatcher("viewMessages.jsp").forward(req, resp);
         } else if ("sent".equals(action)) {
+
             List<MessageDto> messages = dao.getSentMessages(userId);
             req.setAttribute("messages", messages);
             req.getRequestDispatcher("sentMessages.jsp").forward(req, resp);

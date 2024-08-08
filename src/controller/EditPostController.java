@@ -24,9 +24,11 @@ public class EditPostController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String user_id = null;
+		
 		int productId = Integer.parseInt(req.getParameter("productId"));
         ProductDao dao = new ProductDao();
-        ProductDto to = dao.viewPost(productId);
+        ProductDto to = dao.viewPost(productId,user_id);
         req.setAttribute("to", to);
         req.getRequestDispatcher("/editPost.jsp").forward(req, resp);
 	}
