@@ -98,7 +98,7 @@ public class CategoryController extends HttpServlet {
         req.setAttribute("endPage", endPage);
         
         // category.jsp 페이지로 포워딩
-        req.getRequestDispatcher("/category.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/category.jsp").forward(req, resp);
     }
    
    

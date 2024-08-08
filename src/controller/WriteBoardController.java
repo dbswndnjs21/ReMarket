@@ -30,7 +30,7 @@ public class WriteBoardController extends HttpServlet{
 			SelectUserDao dao = new SelectUserDao();
 			UserDto dto = dao.select(userId);
 			req.setAttribute("dto", dto);
-			req.getRequestDispatcher("/writeBoard.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/writeBoard.jsp").forward(req, resp);
 		}
 	}
 	

@@ -24,7 +24,7 @@ public class EditBoardController extends HttpServlet{
 		BoardDao dao = new BoardDao();
 		dao.updateBoard(id, title, content);
 		
-		resp.sendRedirect("viewBoard.do?id=" + id);
+		resp.sendRedirect("/viewBoard.do?id=" + id);
 	}
 	
 	

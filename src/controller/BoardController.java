@@ -73,7 +73,7 @@ public class BoardController extends HttpServlet{
 		req.setAttribute("condition", condition);
 	    req.setAttribute("keyword", keyword);
 	    
-		req.getRequestDispatcher("/board.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board.jsp").forward(req, resp);
 	}
 	
 }

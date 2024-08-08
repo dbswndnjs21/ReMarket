@@ -26,7 +26,7 @@ public class WriteBlameController extends HttpServlet{
 		req.setAttribute("postTitle", postTitle);
 		req.setAttribute("productId", productId);
 		
-		req.getRequestDispatcher("writeBlame.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/writeBlame.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -64,10 +64,10 @@ public class WriteBlameController extends HttpServlet{
 	    } else {
 	    	System.out.println("실패");
 	    	req.setAttribute("errorMessage", "신고 등록에 실패했습니다.");
-            req.getRequestDispatcher("/writeBlame.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/writeBlame.jsp").forward(req, resp);
 	    }
 	    
 	    // 성공 페이지로 리다이렉트
-        resp.sendRedirect(req.getContextPath() + "/blameResult.jsp");
+        resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/blameResult.jsp");
 	}
 }

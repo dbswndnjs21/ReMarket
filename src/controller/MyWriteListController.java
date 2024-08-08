@@ -25,7 +25,7 @@ public class MyWriteListController extends HttpServlet {
         ArrayList<ProductDto> productDto = dao.selectList(user_id);
         req.setAttribute("productDto", productDto);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/myWriteList.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/myWriteList.jsp");
         dispatcher.forward(req, resp);
 
     }
@@ -42,7 +42,7 @@ public class MyWriteListController extends HttpServlet {
         ArrayList<ProductDto> productDto = dao.selectList(user_id);
         req.setAttribute("productDto", productDto);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/myWriteList.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/myWriteList.jsp");
         dispatcher.forward(req, resp);
     }
 }

@@ -19,7 +19,7 @@ public class MessageController extends HttpServlet {
         String userId = (String) session.getAttribute("user_id");
 
         if (userId == null) {
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("/WEB-INF/views/login.jsp");
             return;
         }
 
@@ -33,12 +33,12 @@ public class MessageController extends HttpServlet {
         if (action == null || "view".equals(action)) {
             List<MessageDto> messages = dao.getMessages(userId);
             req.setAttribute("messages", messages);
-            req.getRequestDispatcher("viewMessages.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/viewMessages.jsp").forward(req, resp);
         } else if ("sent".equals(action)) {
 
             List<MessageDto> messages = dao.getSentMessages(userId);
             req.setAttribute("messages", messages);
-            req.getRequestDispatcher("sentMessages.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/sentMessages.jsp").forward(req, resp);
         } else if ("send".equals(action)) {
             MessageDto message = new MessageDto();
             message.setUser_id(userId);
@@ -48,23 +48,23 @@ public class MessageController extends HttpServlet {
             message.setContent(req.getParameter("content"));
             message.setMsgStatus(1);
             dao.sendMessage(message);
-            resp.sendRedirect("message.do?action=view&status=sent");
+            resp.sendRedirect("/main.do");
         } else if ("delete".equals(action)) {
             int msgId = Integer.parseInt(req.getParameter("msgId"));
             dao.deleteMessage(msgId);
-            resp.sendRedirect("message.do?action=view&status=deleted");
+            resp.sendRedirect("/message.do?action=view&status=deleted");
         } else if ("reply".equals(action)) {
             String receiveId = req.getParameter("receiveId");
             String productName = req.getParameter("productName");
             req.setAttribute("receiveId", receiveId);
             req.setAttribute("productName", productName);
-            req.getRequestDispatcher("sendMessage.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/sendMessage.jsp").forward(req, resp);
         } else if("read".equals(action)) {
             int msgId = Integer.parseInt(req.getParameter("msgId"));
             dao.readMessage(msgId);
-            resp.sendRedirect("message.do?action=view&status=read");
+            resp.sendRedirect("/message.do?action=view&status=read");
         }else {
-            resp.sendRedirect(req.getContextPath() + "/viewMessages.jsp");
+            resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/viewMessages.jsp");
         }
     }
 

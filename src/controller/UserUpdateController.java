@@ -24,7 +24,7 @@ public class UserUpdateController extends HttpServlet {
         UserDto select = dao.select(user_id);
 
         req.setAttribute("select", select);
-        req.getRequestDispatcher("/editProfile.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/editProfile.jsp").forward(req, resp);
     }
     
     @Override
@@ -43,7 +43,7 @@ public class UserUpdateController extends HttpServlet {
         if (!password.equals(confirmPassword)) {
             req.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
             req.setAttribute("select", new UserDto(user_id, name, email, phone, addr, birth)); // 입력한 값을 유지
-            req.getRequestDispatcher("/editProfile.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/editProfile.jsp").forward(req, resp);
             return;
         }
         
@@ -65,7 +65,7 @@ public class UserUpdateController extends HttpServlet {
         } else {
             req.setAttribute("msg", "오류로 인한 정보 수정 실패");
         }
-        RequestDispatcher rd = req.getRequestDispatcher("/mypage.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/mypage.jsp");
         rd.forward(req, resp);
     }
 }

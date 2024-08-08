@@ -21,7 +21,7 @@ public class ViewBlameController extends HttpServlet{
 		BlameDto dto = dao.selectById(Integer.parseInt(id));
 		
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/viewBlame.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/viewBlame.jsp").forward(req, resp);
 		
 	}
 }

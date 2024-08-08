@@ -70,7 +70,7 @@ public class MainController extends HttpServlet {
        req.setAttribute("newItem", newItem);
        req.setAttribute("categoryItems", categoryItems);
        // JSP 페이지로 포워딩
-       RequestDispatcher dispatcher = req.getRequestDispatcher("/main.jsp");
+       RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/main.jsp");
        dispatcher.forward(req, resp);
    }
 }

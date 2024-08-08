@@ -15,7 +15,8 @@ import java.io.IOException;
 public class JoinController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("member.jsp");
+        
+        req.getRequestDispatcher("/WEB-INF/views/member.jsp").forward(req, resp);
     }
 
     @Override
@@ -113,6 +114,6 @@ public class JoinController extends HttpServlet {
         req.setAttribute("email", req.getParameter("email"));
         req.setAttribute("birth", req.getParameter("birth"));
         req.setAttribute("addr", req.getParameter("addr"));
-        req.getRequestDispatcher("/member.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/member.jsp").forward(req, resp);
     }
 }

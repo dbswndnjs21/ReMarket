@@ -31,10 +31,10 @@ public class WriteProductController extends HttpServlet {
 		String user_id = (String)session.getAttribute("user_id");
 		
 		if(user_id != null && !user_id.trim().isEmpty()) {
-			req.getRequestDispatcher("/writeProduct.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/writeProduct.jsp").forward(req, resp);
 			
 		}else {
-			resp.sendRedirect(req.getContextPath() + "/login.jsp");
+			resp.sendRedirect(req.getContextPath() + "/login.do");
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class WriteProductController extends HttpServlet {
 			req.setAttribute("to", to);
 			req.getRequestDispatcher("/main.do").forward(req, resp);
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/error.jsp");
+			resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/error.jsp");
 		}
 		
 	}
