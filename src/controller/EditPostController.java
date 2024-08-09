@@ -72,7 +72,8 @@ public class EditPostController extends HttpServlet {
 			file.delete();
 			req.setAttribute("fto", fto);
 			req.setAttribute("to", to);
-			req.getRequestDispatcher("/main.do").forward(req,resp);
+			//req.getRequestDispatcher("/main.do").forward(req,resp);
+			resp.sendRedirect(req.getContextPath() + "/main.do");
 		}else {
 			resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/error.jsp");
 		}

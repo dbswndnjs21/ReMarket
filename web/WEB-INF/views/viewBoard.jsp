@@ -36,11 +36,13 @@
 						<td colspan="3" class="white-bg">${dto.hit}</td>
 					</tr>
 					<tr>
-						<td colspan="4" class="content-cell">${dto.content}</td>
+						<td colspan="4" class="content-cell" id="contentCell">
+							${dto.content}
+						</td>
 					</tr>
 				</tbody>
 			</table>
-	
+			
 
 			<!-- 댓글 박스: 달려있는 댓글, 댓글 입력창 포함 -->
 			<div class = "comment-box">
@@ -210,6 +212,15 @@
 	        actionButtons.style.display = "block"; // 수정 및 삭제 버튼 보이기
 	    }
 	}
+	
+    // 줄바꿈을 <br>로 변환하는 함수
+    function formatContent() {
+        var contentCell = document.getElementById('contentCell');
+        contentCell.innerHTML = contentCell.innerHTML.replace(/\n/g, '<br>');
+    }
+
+    // 페이지 로드 시 함수 호출
+    window.onload = formatContent;
 	
 	</script>
 

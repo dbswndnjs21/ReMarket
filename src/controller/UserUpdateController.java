@@ -64,6 +64,7 @@ public class UserUpdateController extends HttpServlet {
             req.setAttribute("userDto", user);
         } else {
             req.setAttribute("msg", "오류로 인한 정보 수정 실패");
+            req.setAttribute("userDto", user);
         }
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/mypage.jsp");
         rd.forward(req, resp);

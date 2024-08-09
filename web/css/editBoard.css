@@ -254,7 +254,7 @@
 	    outline: none; /* 포커스 시 외곽선 제거 */
 	    resize: vertical; /* 세로로만 크기 조절 가능하게 설정 */
 	    padding: 10px; /* 내부 여백 추가 */
-	    font-size: 14px; /* 글자 크기 조정 */
+	    font-size: 16px; /* 글자 크기 조정 */
 	    overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
 	    resize: none;  /* 크기 조절 비활성화 */
 	}

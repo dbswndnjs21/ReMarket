@@ -68,6 +68,7 @@ public class WriteBlameController extends HttpServlet{
 	    }
 	    
 	    // 성공 페이지로 리다이렉트
-        resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/blameResult.jsp");
+        //resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/blameResult.jsp");
+	    req.getRequestDispatcher("/WEB-INF/views/blameResult.jsp").forward(req, resp);
 	}
 }

@@ -22,10 +22,7 @@
 
 			<!-- 검색 기능 -->
 			<form action="blameBoard.do" method="get" class = "block search-condition">
-				
-				
 				<button type="submit" class="btn Search">처리 미완료 신고글 조회</button>
-				
 			</form>
 
 			<table class="column">
@@ -42,16 +39,16 @@
 					 <tr>
 					 	<td>${dto.blameId}</td>
 					 	<td>${dto.blameCategory}</td>
-					 	<td><a href ="viewBlame.do?blameId=${dto.blameId}">${dto.blameTitle}</td>
+					 	<td><a href ="viewBlame.do?blameId=${dto.blameId}">${dto.blameTitle}</a></td>
 					 	<td>${dto.userName}</td>
 					 	<td>${dto.createdAt}</td>
 					 	<td>
 					 		<form action="completeBlame.do" method="post">
-					 			<input type="hidden" name="id" value="${dto.blameId}">
-					 			<input type="hidden" name="userName" value="${dto.userName}">
-					 			<button type="submit" class="complete-button">처리하기</button>
-					 			<button type="submit" class="refuse-button">처리거부</button>
-					 		</form>
+                                    <input type="hidden" name="blameId" value="${dto.blameId}">
+                                    <input type="hidden" name="userName" value="${dto.userName}">
+                                    <button type="submit" name="action" value="complete" class="complete-button">처리하기</button>
+                                    <button type="submit" name="action" value="refuse" class="refuse-button">처리거부</button>
+                            </form>
 					 	</td>
 					 </tr>
 					 </c:forEach>

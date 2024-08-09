@@ -33,7 +33,7 @@
 %>
 <header class="header">
     <div class="container">
-    	<a href="main.do">
+       <a href="main.do">
         <img src="../images/logo.svg" alt="다시마켓 로고" width="100" class="logo">
         </a>
         <h1><%= headerTitle %>
@@ -134,8 +134,11 @@
             <li style="position: relative; margin-bottom: 10px;">
                 <span class="notification-icon">💬</span>
                 <span class="notification-message" style="margin-left: 5px;">
+                <form action ="board.do" method ="post" style="display: inline;">
+                    <button type="submit" style="background: none; border: none; padding: 0; margin: 0; color: inherit; text-decoration: underline; cursor: pointer;">
                         ${notification3.content}
-                </span>
+                    </button>
+                 </form>
             </li>
         </c:forEach>
     </ul>

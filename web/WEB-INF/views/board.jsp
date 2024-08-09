@@ -1,3 +1,4 @@
+<%@page import="dao.CommentDao"%>
 <%@page import="dao.BoardDao"%>
 <%@page import="dto.BoardDto"%>
 <%@page import="java.util.List"%>
@@ -24,7 +25,7 @@
 			<h2>자유게시판</h2>
 
 			<!-- 검색 기능 -->
-		<form action="board.do" method="get" class = "block search-condition">
+		<form action="board.do" method="get" class = "block search-condition" onsubmit="return validateSearch()">
 				<span class="form-Group"> 
 				<select id="searchCondition" name="condition" class="search-select">
 						<option value="">--검색 선택--</option>
@@ -43,17 +44,23 @@
 
 			<table class="column">
 				<tr>
-					<th class="table-header">순번</th>
-					<th class="table-header">제목</th>
-					<th class="table-header">작성자명</th>
-					<th class="table-header">등록일</th>
-					<th class="table-header">조회수</th>
+					<th class="table-header" style ="width: 100px;">순번</th>
+					<th class="table-header title-column">제목</th>
+					<th class="table-header" style ="width: 150px;">작성자명</th>
+					<th class="table-header" style ="width: 150px;">등록일</th>
+					<th class="table-header" style ="width: 150px;">조회수</th>
 				</tr>
 				<tbody>
+				
 					<c:forEach var="dto" items="${requestScope.lists}">
 						<tr>
 							<td>${dto.id}</td>
-							<td><a href="viewBoard.do?id=${dto.id}">${dto.title}</a></td>
+							<td><a href="viewBoard.do?id=${dto.id}">${dto.title} 
+								<c:if test="${dto.commentCount > 0}">
+									<span style="color: red;">(${dto.commentCount})</span>
+								</c:if>
+								</a>
+							</td>
 							<td>${dto.userName}</td>
 							<td>${dto.formattedCreatedAt}</td>
 							<td>${dto.hit}</td>
@@ -118,6 +125,25 @@
 	    function resetSearch() {
 	    	window.location.href = 'board.do';    
 	    }
+	    
+	    
+	    function validateSearch() {
+	        let condition = document.getElementById("searchCondition").value;
+	        let keyword = document.getElementById("searchInput").value.trim(); // 입력값 공백 제거
+	        if (condition === "") {
+	            alert("검색 구분을 선택해주세요.");
+	            return false; // 폼 제출 x
+	        }
+	        
+	        if (keyword === "") {
+	            alert("검색어를 입력하세요.");
+	            return false; // 폼 제출 x
+	        }
+	       
+	        return true; // 폼을 제출합니다.
+	    }
+	    
+	    
 	</script>
 	
 	

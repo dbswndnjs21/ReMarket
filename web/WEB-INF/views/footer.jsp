@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
     function openMap() {
-        window.open('map.jsp', '_blank', 'width=800,height=600');
+        window.open('map.do', '_blank', 'width=800,height=600');
     }
 </script>
 <style>
@@ -80,9 +80,9 @@
         <div class="footer-section">
             <h3>링크</h3>
             <ul>
-                <li><a href="company.jsp">회사 소개</a></li>
-                <li><a href="serviceCenter.jsp">고객센터</a></li>
-                <li><a href="policy.jsp">개인정보 처리방침</a></li>
+                <li><a href="company.do">회사 소개</a></li>
+                <li><a href="serviceCenter.do">고객센터</a></li>
+                <li><a href="policy.do">개인정보 처리방침</a></li>
             </ul>
         </div>
         <div class="footer-section">

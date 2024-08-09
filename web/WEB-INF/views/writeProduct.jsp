@@ -61,7 +61,7 @@
 
                     <!-- Submit and Cancel buttons -->
                     <button type="submit">등록</button>
-                    <a href="main.jsp" class="cancel-button">취소</a>
+                    <a href="main.do" class="cancel-button">취소</a>
                 </form>
             </div>
         </div>

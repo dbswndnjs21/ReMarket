@@ -18,6 +18,10 @@ public class BoardDto {
 	
 	private String userName; // user1 테이블에서 userName을 사용하기 위해 변수 생성.
 	
+	private int commentCount; // 댓글 개수 저장
+	
+	
+
 	public String getFormattedCreatedAt() {
        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -109,6 +113,12 @@ public class BoardDto {
 		this.userName = userName;
 	}
 
-	
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 	
 }

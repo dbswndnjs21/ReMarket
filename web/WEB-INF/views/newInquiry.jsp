@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    // headerTitle을 설정하여 헤더에 표시될 제목을 지정
     request.setAttribute("headerTitle", "문의하기");
 %>
 <!DOCTYPE html>
@@ -19,16 +18,19 @@
     <div class="container">
         <div class="content">
             <h2>문의하기</h2>
-            <form action="submitInquiry.do" method="post">
-                <div class="form-container">
-                    <label for="inquiryTitle">제목</label>
-                    <input type="text" id="inquiryTitle" name="inquiryTitle" required>
-                    <label for="inquiryContent">문의 내용</label>
-                    <textarea id="inquiryContent" name="inquiryContent" rows="10" required></textarea>
-                    <button type="submit">문의 제출</button>
-                    <a href="cancelLink" class="cancel-button">취소</a>
-                </div>
-            </form>
+           	<form action="message.do" method="get" class="message-form">
+        		<input type="hidden" name="action" value="send">
+        		<input type="hidden" name="sendId" value="${sessionScope.user_id}">
+        		<input type="hidden" id="receiveId" name="receiveId" value="admin">
+        		
+        		<label for="receiveId">수신자 ID:</label>
+		        <p id="receiveId">운영자</p>
+
+		        <label for="content">내용:</label>
+		        <textarea id="content" name="content"></textarea>
+		
+		        <input type="submit" value="전송">
+   			</form>
         </div>
     </div>
 

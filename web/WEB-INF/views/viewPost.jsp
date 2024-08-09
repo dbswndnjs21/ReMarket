@@ -73,8 +73,7 @@ if (rmg != null) {
 					<c:if test="${sessionScope.user_id ne to.user_id}">
 						<c:choose>
 							<c:when test="${not empty sessionScope.user_id}">
-								<a
-									href="writeBlame.do?author=${to.user_id}&postTitle=${to.productName}&productId=${to.productId}"
+								<a href="writeBlame.do?author=${to.user_id}&postTitle=${to.productName}&productId=${to.productId}"
 									class="report-button">신고하기</a>
 							</c:when>
 							<c:otherwise>

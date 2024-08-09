@@ -42,9 +42,9 @@
         <aside class="sidebar">
             <h2>관리자 페이지</h2>
              <ul>
-                <li><a href="javascript:void(0)" onclick="loadPage('memberIndexPage.do')">회원 목록 조회</a></li>
-                <li><a href="javascript:void(0)" onclick="loadPage('blameBoardPage.do')">신고 목록 조회</a></li>
-                <li><a href="javascript:void(0)" onclick="loadPage('QNAIndexPage.do')">1:1 Q&A 목록 조회</a></li>
+                <li><a href="javascript:void(0)" onclick="loadPage('userList.do')">회원 목록 조회</a></li>
+                <li><a href="javascript:void(0)" onclick="loadPage('blameBoard.do')">신고 목록 조회</a></li>
+                <li><a href="javascript:void(0)" onclick="loadPage('message.do')">1:1 Q&A 목록 조회</a></li>
             </ul>
         </aside>
 
