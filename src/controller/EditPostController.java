@@ -30,7 +30,7 @@ public class EditPostController extends HttpServlet {
         ProductDao dao = new ProductDao();
         ProductDto to = dao.viewPost(productId,user_id);
         req.setAttribute("to", to);
-        req.getRequestDispatcher("/editPost.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/editPost.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -72,9 +72,10 @@ public class EditPostController extends HttpServlet {
 			file.delete();
 			req.setAttribute("fto", fto);
 			req.setAttribute("to", to);
-			req.getRequestDispatcher("/main.do").forward(req,resp);
+			//req.getRequestDispatcher("/main.do").forward(req,resp);
+			resp.sendRedirect(req.getContextPath() + "/main.do");
 		}else {
-			resp.sendRedirect(req.getContextPath() + "/error.jsp");
+			resp.sendRedirect(req.getContextPath() + "/WEB-INF/views/error.jsp");
 		}
 		
 	}

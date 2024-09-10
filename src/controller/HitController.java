@@ -80,7 +80,7 @@ public class HitController extends HttpServlet{
 	  //  req.setAttribute("list", list);
 	    
 	    // JSP 페이지로 포워딩
-	    RequestDispatcher dispatcher = req.getRequestDispatcher("/hit.jsp");
+	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/hit.jsp");
 	    dispatcher.forward(req, resp);
 		
 	}

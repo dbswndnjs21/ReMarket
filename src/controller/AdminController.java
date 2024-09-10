@@ -13,6 +13,6 @@ public class AdminController extends HttpServlet{
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 요청을 adminPage.jsp로 포워딩
-        request.getRequestDispatcher("/adminPage.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/adminPage.jsp").forward(request, response);
     }
 }

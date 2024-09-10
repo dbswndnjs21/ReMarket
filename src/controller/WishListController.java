@@ -26,7 +26,7 @@ public class WishListController extends HttpServlet {
         ArrayList<WishListDto> wishListDto = dao.likeSelect(user_id);
 
         req.setAttribute("wishListDto",wishListDto);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/wishList.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/wishList.jsp");
         dispatcher.forward(req, resp);
 
     }

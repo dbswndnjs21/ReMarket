@@ -32,7 +32,7 @@ public class ReserveController extends HttpServlet {
             message = "판매가 완료되었습니다.";
         } else {
             message = "잘못된 요청입니다.";
-            resp.sendRedirect("errorPage.jsp?rmg=" + URLEncoder.encode(message, "UTF-8"));
+            resp.sendRedirect("/WEB-INF/views/errorPage.jsp?rmg=" + URLEncoder.encode(message, "UTF-8"));
             return;
         }
         
@@ -45,11 +45,11 @@ public class ReserveController extends HttpServlet {
         	  
             req.getSession().setAttribute("rmg", message);
            
-            resp.sendRedirect("viewPost.do?productId=" + productId + "&returnPage=" + URLEncoder.encode(returnPage, "UTF-8"));
+            resp.sendRedirect("/viewPost.do?productId=" + productId + "&returnPage=" + URLEncoder.encode(returnPage, "UTF-8"));
         } else {
             // 오류 메시지를 세션에 저장하고 리다이렉션
             req.getSession().setAttribute("rmg", "처리 실패. 다시 시도해 주세요.");
-            resp.sendRedirect("viewPost.do?productId=" + productId);
+            resp.sendRedirect("/viewPost.do?productId=" + productId);
         }
     }
 

@@ -314,7 +314,7 @@ public class BlameDao {
 			
 			try {
 				conn = JdbcUtil.getCon();
-				String sql = "update blame set status = 0 where id = ?";
+				String sql = "update blame set status = 0 where blameId = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, blameId);
 				 pstmt.executeUpdate();
@@ -333,7 +333,7 @@ public class BlameDao {
 			
 			try {
 				conn = JdbcUtil.getCon();
-				String sql = "update blame set status = 0 where id = ?";
+				String sql = "update blame set status = 2 where blameId = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, blameId);
 				 pstmt.executeUpdate();

@@ -19,6 +19,6 @@ public class MyPageController extends HttpServlet {
         MyPageDao dao = new MyPageDao();
         UserDto userDto = dao.select(user_id);
         req.setAttribute("userDto", userDto);
-        req.getRequestDispatcher("/mypage.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/mypage.jsp").forward(req, resp);
     }
 }

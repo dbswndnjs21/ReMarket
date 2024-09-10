@@ -21,7 +21,7 @@ public class EditCommentController extends HttpServlet{
 		
 		CommentDao commentDao = new CommentDao();
 		commentDao.updateComment(commentid, commentContent);
-		resp.sendRedirect("viewBoard.do?id=" + boardid);
+		resp.sendRedirect("/viewBoard.do?id=" + boardid);
 		
 		
 		

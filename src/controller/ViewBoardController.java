@@ -53,7 +53,7 @@ public class ViewBoardController extends HttpServlet{
 		req.setAttribute("userName", userName);
 		req.setAttribute("pcode", pcode);
 		req.setAttribute("commentList", commentList);
-		req.getRequestDispatcher("/viewBoard.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/viewBoard.jsp").forward(req, resp);
 		
 	}
 	
@@ -66,7 +66,7 @@ public class ViewBoardController extends HttpServlet{
 		BoardDto dto = dao.selectById(Integer.parseInt(id));
 		
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/editBoard.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/editBoard.jsp").forward(req, resp);
 	
 	}
 	

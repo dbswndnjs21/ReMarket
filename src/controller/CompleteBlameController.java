@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.BlameDao;
+import dao.NotificationDao;
+import dto.NotificationDto;
 
 @WebServlet("/completeBlame.do")
 public class CompleteBlameController extends HttpServlet {
@@ -15,23 +17,28 @@ public class CompleteBlameController extends HttpServlet {
     	 req.setCharacterEncoding("UTF-8");
          resp.setContentType("text/html; charset=UTF-8");
 
-         String idStr = req.getParameter("blameId");
+         String idstr = req.getParameter("blameId");
          String userName = req.getParameter("userName");
+         String action = req.getParameter("action");
          
-        try {
-        	int id = Integer.parseInt(idStr);
+         System.out.println("blameId :" + idstr);
+         try {
+        	int id = Integer.parseInt(idstr);
             BlameDao blameDao = new BlameDao();
             
-            // 게시물 처리완료 로직
-            blameDao.completeBlame(id);
-            
-            // 게시물 처리거부 로직
-            blameDao.refuseBlame(id);
-            
-            
-            // 알림 전송 로직 (작성자에게 알림 전송)
-            blameDao.sendNotification(userName, "신고 신청이 처리되었습니다.");
-            // 처리 완료 후 목록 페이지로 리다이렉트
+           
+	    	
+            if ("complete".equals(action)) {
+                // 게시물 처리완료 로직
+                blameDao.completeBlame(id);
+               
+            } else if ("refuse".equals(action)) {
+                // 게시물 처리거부 로직
+                blameDao.refuseBlame(id);
+                
+            }
+
+         // 처리 완료 후 목록 페이지로 리다이렉트
             resp.sendRedirect("blameBoard.do");
         } catch (NumberFormatException e) {
             e.printStackTrace();

@@ -345,8 +345,37 @@ public class BoardDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+
+	// 9. 게시글 작성자의 pcode를 활용해서 게시글 작성자의 user_id 찾는 메서드(알림 관련)	
+		
+		public String getBoardUserID(int boardId) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String userId = null;
+			
+			try {
+				conn = JdbcUtil.getCon();
+				String sql = "select u.user_id from board b join user1 u on b.userid = u.pcode where b.id = ?"; 
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, boardId);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					userId = rs.getString(1);
+				}
+				return userId;
+			} catch (SQLException e) {
+				System.out.println("[에러] 게시글 아이디로 userId를 조회할 수 없습니다. " + e.getMessage());
+				return userId;
+			} finally {
+				JdbcUtil.close(conn, pstmt, rs);
+			}
 			
 			
 		}
-
+		
+		
+		
 }

@@ -124,9 +124,34 @@ public class CommentDao {
 			JdbcUtil.close(conn, pstmt, null);
 		}
 		
-		
 	}
 	
+	// 5. 댓글 총 개수
+	public int getCommentCount(int boardId) {
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int CommentCount = 0; 
+		
+		try {
+			conn = JdbcUtil.getCon();
+			String sql = "select count(*) from comment1 where boardId = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				CommentCount = rs.getInt(1);
+			}
+			
+			return CommentCount;
+		} catch (SQLException e) {
+			System.out.println("[에러] 댓글 개수를 알 수 없습니다." + e.getMessage());
+			return CommentCount;
+		} finally {
+			JdbcUtil.close(conn, pstmt, rs);
+		}
+
+	}
 	
 	
 }

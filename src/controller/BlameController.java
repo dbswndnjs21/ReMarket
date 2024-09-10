@@ -67,6 +67,6 @@ public class BlameController extends HttpServlet{
 		req.setAttribute("condition", condition);
 	    req.setAttribute("keyword", keyword);
 	    
-		req.getRequestDispatcher("/blameBoardPage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/blameBoardPage.jsp").forward(req, resp);
 	}
 }

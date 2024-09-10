@@ -46,7 +46,7 @@ public class ViewPostController extends HttpServlet {
       req.setAttribute("to", to);
       
       // JSP 페이지로 포워딩
-       RequestDispatcher dispatcher = req.getRequestDispatcher("/viewPost.jsp");
+       RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/viewPost.jsp");
        dispatcher.forward(req, resp);
    }
    

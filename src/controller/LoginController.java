@@ -14,10 +14,10 @@ import java.io.IOException;
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
-
+	
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
         } else { // 틀린 경우
             req.setAttribute("msg","로그인 정보가 맞지 않습니다");
             // request 에 setAttribute 담았기 때문에 반드시 forward 방식으로 보내야함
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }
     }
 }

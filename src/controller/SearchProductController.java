@@ -80,6 +80,6 @@ public class SearchProductController extends HttpServlet {
         req.setAttribute("searchCondition", searchCondition);
 		req.setAttribute("searchInput", searchInput);
 		req.setAttribute("status", status); // 현재 선택된 상태를 JSP로 전달
-		req.getRequestDispatcher("/searchProduct.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/searchProduct.jsp").forward(req, resp);
 	}
 }
